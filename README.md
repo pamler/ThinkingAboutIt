@@ -32,55 +32,8 @@ CSS，sass/scss/stylus，这样使用css的好处
 写一个自己的CSS库又不一样，命名规范，如何层叠，粒度如何划分，bootstrap,alice
 
 ## FIS解决了什么问题
-
-## 静态资源处理策略
-
- - ```<script src='path'></script>``` 引用的脚本默认会在打包后移动到body底部
- - ```<script data-position='head'></script>``` 引用或声明的脚本会移动到head底部
- - ```<script|link data-single='true'></script|link>``` 引用或声明的脚本和样式不会进行自动打包
- - ```<link rel='stylesheet' href='path'>``` 引用的样式表默认会在打包后移动到head底部
- - ```<link rel='stylesheet' href='path'>``` 引用的样式表默认会在打包后移动到head底部
- - ```<script>console.log('hello world')</script>``` 编写的内嵌脚本将会移动到body底部
- - ```<script|link data-fixed='true'>``` 声明的标签不会被处理
- - ```<style></style>``` 不会进行任何处理
-
-## 用法
-
-    $ npm install -g fis-postpackager-simple
-    $ vi path/to/project/fis-conf.js
-
-```javascript
-//file : path/to/project/fis-conf.js
-fis.config.set('modules.postpackager', 'simple');
-//关闭autoCombine可以设置是否将零散资源进行打包
-//fis.config.set('settings.postpackager.simple.autoCombine', false);
-```
-
-## 配置项
-
-### autoCombine
-
-设置是否自动将零散资源进行打包，默认为 `true`，关闭后仅会替换设置了pack的资源
-
-### fullPackHit
-
-设置是否资源需要全部命中pack设置才会将整个资源包引用
-
-#### fullPackHit.js
-
-默认为 `false`
-
-#### fullPackHit.css
-
-默认为 `false`
-
-## 适应范围
-
-用于简单的Web前端项目自动打包减少页面请求连接数，同时可以通过[pack](https://github.com/fex-team/fis/wiki/%E9%85%8D%E7%BD%AEAPI#pack)设置来对公共资源进行独立打包。
-
-要求使用的页面是完整的HTML页面，即包含head与body标签，支持通过html inline的形式添加的公用head与底栏等。但是不支持母板页形式的页面继承。
-
-## DEMO
-
-https://github.com/hefangshi/fis-quickstart-demo
-
+1 资源压缩：包括脚本、样式、图片资源
+2 调整所有资源引用的相对路径为绝对路径
+3 添加文件版本，MD5时间戳，自动更新资源引用路径
+4 资源合并，减少http请求数
+5 合并图片
